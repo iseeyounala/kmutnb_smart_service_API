@@ -1,4 +1,4 @@
-### FOOD COURT API
+### API For KMUTNB Smart Service & KMUTNB Smart Service For Driver & Web app backend
 
 ## .env config
 MY_API_HOST=
