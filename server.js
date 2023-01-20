@@ -13,7 +13,7 @@ dotenv.config();
 
 const {
   web_login_routes,
-  mobile_login_routes,
+  mobile_user_login_routes,
 } = require("./routes");
 
 const app = express();
@@ -41,8 +41,8 @@ app.get("/", (req, res) => res.json({ message: "Powered By KMUTNB Smart Service"
 // web
 app.use("/web/login", web_login_routes);
 
-//mobile
-app.use("/mobile/login", mobile_login_routes);
+//mobile user
+app.use("/mobile/user/login", mobile_user_login_routes);
 
 
 app.listen(3001, () => {

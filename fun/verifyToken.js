@@ -9,7 +9,7 @@ const verifyJWT = (req, res, next) => {
       if (err) {
         res.json({ auth: false, meg: "you failed Authentication" });
       } else {
-        req.s_id = decoded.id;
+        req.std_id = decoded.id;
         next();
       }
     });
