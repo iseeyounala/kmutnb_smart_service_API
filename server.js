@@ -14,6 +14,7 @@ dotenv.config();
 const {
   web_login_routes,
   mobile_user_login_routes,
+  mobile_driver_login_routes
 } = require("./routes");
 
 const app = express();
@@ -43,6 +44,10 @@ app.use("/web/login", web_login_routes);
 
 //mobile user
 app.use("/mobile/user/login", mobile_user_login_routes);
+
+// mobile Driver
+app.use("/mobile/driver/login", mobile_driver_login_routes);
+
 
 
 app.listen(3001, () => {
