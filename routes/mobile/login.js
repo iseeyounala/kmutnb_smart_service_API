@@ -3,11 +3,11 @@ const route = express.Router();
 const db = require("../../db/db.config");
 const jwt = require("jsonwebtoken");
 const dateFormat = require("dateformat");
-
 const dateNow = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
 
 route.post("/", (req, res) => {
   const { username, password } = req.body;
+  
   if (!username && !password) {
     let data = {
       auth: false,

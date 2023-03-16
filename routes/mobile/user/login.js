@@ -26,7 +26,8 @@ route.post("/", (req, res) => {
                     let data = {
                       status: true,
                       meg: "เข้าสู่ระบบสำเร็จ",
-                      token: token
+                      token: token,
+                      std_id: std_id
                     };
                     res.json(data);
                   } else {

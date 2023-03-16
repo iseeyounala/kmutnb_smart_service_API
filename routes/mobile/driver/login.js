@@ -3,11 +3,13 @@ const route = express.Router();
 const db = require("../../../db/db.config");
 const jwt = require("jsonwebtoken");
 const dateFormat = require("dateformat");
+const io = require("../../../fun/socket");
 
 const dateNow = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
 
 route.post("/", (req, res) => {
   const { username, password } = req.body;
+  io.emit('test', username,)
   if (username && password) {
     db.query(
       `SELECT driver_id, driver_fname, driver_lname FROM tb_driver WHERE driver_username = '${username}' AND driver_password = '${password}'`,
@@ -16,6 +18,7 @@ route.post("/", (req, res) => {
           if (result.length == 1 && result) {
             let driver_id = result[0].driver_id;
             let driver_fname = result[0].driver_fname;
+            
             db.query(
               `UPDATE tb_driver SET driver_last_login = NOW() WHERE driver_id = '${driver_id}'`,
               (err, result_updated) => {
@@ -32,6 +35,7 @@ route.post("/", (req, res) => {
                       status: true,
                       meg: "เข้าสู่ระบบสำเร็จ",
                       token: token,
+                      driver_id: driver_id
                     };
                     res.json(data);
                   } else {
