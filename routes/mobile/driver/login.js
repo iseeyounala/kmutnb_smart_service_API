@@ -3,13 +3,13 @@ const route = express.Router();
 const db = require("../../../db/db.config");
 const jwt = require("jsonwebtoken");
 const dateFormat = require("dateformat");
-const io = require("../../../fun/socket");
+// const io = require("../../../fun/socket");
 
 const dateNow = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
 
 route.post("/", (req, res) => {
   const { username, password } = req.body;
-  io.emit('test', username,)
+  // io.emit('test', username,)
   if (username && password) {
     db.query(
       `SELECT driver_id, driver_fname, driver_lname FROM tb_driver WHERE driver_username = '${username}' AND driver_password = '${password}'`,
