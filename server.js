@@ -21,6 +21,11 @@ const {
   mobile_user_getCheckPoint_routes,
   mobile_user_getCheckPointRoom_routes,
   mobile_user_addDataGetCar_routes,
+  mobile_user_getLocationCar_routes,
+  mobile_user_cancelGetCar_routes,
+  mobile_user_checkOldOrderUser_routes,
+  mobile_user_updateStatusGetCar_routes,
+  mobile_user_updateSocketId_routes,
   mobile_driver_login_routes,
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
@@ -69,17 +74,42 @@ app.use(
   verifyJWT,
   mobile_user_addDataGetCar_routes
 );
+app.use(
+  "/mobile/user/getLocationCar",
+  verifyJWT,
+  mobile_user_getLocationCar_routes
+);
+app.use(
+  "/mobile/user/cancelGetCar",
+  verifyJWT,
+  mobile_user_cancelGetCar_routes
+);
+app.use(
+  "/mobile/user/checkOldOrderUser",
+  verifyJWT,
+  mobile_user_checkOldOrderUser_routes
+);
+app.use(
+  "/mobile/user/updateStatusGetCar",
+  verifyJWT,
+  mobile_user_updateStatusGetCar_routes
+);
+app.use(
+  "/mobile/user/updateSocketId",
+  verifyJWT,
+  mobile_user_updateSocketId_routes
+);
 
 // mobile Driver
 app.use("/mobile/driver/login", mobile_driver_login_routes);
 app.use(
   "/mobile/driver/updateSocketId",
-  verifyJWT,
+  // verifyJWT,
   mobile_driver_updateSocketId_routes
 );
 app.use(
   "/mobile/driver/updateLocation",
-  verifyJWT,
+  // verifyJWT,
   mobile_driver_updateLocation_routes
 );
 
@@ -94,11 +124,34 @@ app.io = io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     socket.disconnect();
     db.query(
-      `UPDATE tb_driver SET driver_socket_id = NULL WHERE driver_socket_id = '${socket.id}'`,
-      (err, result) => {
-        err && console.error(err);
+      `SELECT driver_id FROM tb_driver WHERE driver_socket_id = '${socket.id}'`,
+      (err, result_check_driver) => {
+        if (!err) {
+          result_check_driver.length > 0 &&
+            db.query(
+              `UPDATE tb_driver SET driver_socket_id = NULL WHERE driver_socket_id = '${socket.id}'`,
+              (err, result) => {
+                err && console.error(err);
+              }
+            );
+        }
       }
     );
+    db.query(
+      `SELECT std_id FROM tb_student WHERE std_socket_id = '${socket.id}'`,
+      (err, result_check_user) => {
+        if (!err) {
+          result_check_user.length > 0 &&
+            db.query(
+              `UPDATE tb_student SET std_socket_id = NULL WHERE std_socket_id = '${socket.id}'`,
+              (err, result) => {
+                err && console.error(err);
+              }
+            );
+        }
+      }
+    );
+
     console.log(`🔥: ${socket.id} user disconnected`);
   });
 });
