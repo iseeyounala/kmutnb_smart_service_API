@@ -7,18 +7,16 @@ const io = require("../../../fun/socket");
 
 const dateNow = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
 
-route.post("/", (req, res) => {
-    const { get_car_id } = req.body;
-    const io = req.app.io;
+route.get("/", (req, res) => {
+  //   const { username, password } = req.body;
   db.query(
-    `DELETE FROM tb_get_car WHERE get_car_id = ${get_car_id}`,
+    `SELECT cpd_id, cpd_name, cpd_lat, cpd_long FROM tb_checkpoint_drive ORDER BY cpd_id `,
     (err, result) => {
       if (!err) {
         let data = {
           status: true,
-          meg: 'ยกเลิกสำเร็จ',
+          result: result,
         };
-        io.emit("update_list_checkPoint");
         // console.log(result);
         res.json(data);
       } else {

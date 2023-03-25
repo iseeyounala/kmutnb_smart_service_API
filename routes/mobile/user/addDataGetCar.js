@@ -9,9 +9,12 @@ const dateNow = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
 
 route.post("/", (req, res) => {
   const { std_id, userOrgin, destination } = req.body.dataPickUp;
+  // const { std_id, origin, des } = req.body;
+  const io = req.app.io;
   // console.log(req.body.dataPickUp);
   db.query(
     `INSERT INTO tb_get_car(std_id, departure, destination, get_car_created_at) VALUES ('${std_id}', '${userOrgin.cpd_id}', '${destination.cpd_id}', '${dateNow}')`,
+    // `INSERT INTO tb_get_car(std_id, departure, destination, get_car_created_at) VALUES ('${std_id}', '${origin}', '${des}', '${dateNow}')`,
     (err, result) => {
       if (!err) {
         let id = result.insertId;
@@ -45,6 +48,11 @@ route.post("/", (req, res) => {
                     longitude: result_destination[0].cpd_long,
                   },
                 };
+                // io.on("addDataGetCar", () => {
+                //   io.emit("update_list_checkPoint");
+                //   console.log("addDataGetCar!!!!");
+                // });
+                io.emit("update_list_checkPoint");
                 res.json(data);
               }
             );

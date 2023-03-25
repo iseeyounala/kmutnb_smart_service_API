@@ -29,6 +29,7 @@ const {
   mobile_driver_login_routes,
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
+  mobile_driver_getDataListCheckPoint_routes,
 } = require("./routes");
 
 const app = express();
@@ -112,6 +113,11 @@ app.use(
   // verifyJWT,
   mobile_driver_updateLocation_routes
 );
+app.use(
+  "/mobile/driver/getDataListCheckPoint",
+  // verifyJWT,
+  mobile_driver_getDataListCheckPoint_routes
+);
 
 io.listen(
   app.listen(3001, () => {
@@ -154,4 +160,8 @@ app.io = io.on("connection", (socket) => {
 
     console.log(`🔥: ${socket.id} user disconnected`);
   });
+  // socket.on("addDataGetCar", () => {
+  //   socket.emit("update_list_checkPoint");
+  //   console.log("addDataGetCar!!!!");
+  // });
 });

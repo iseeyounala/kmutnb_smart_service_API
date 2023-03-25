@@ -9,6 +9,7 @@ const dateNow = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
 
 route.post("/", (req, res) => {
   const { car_id, std_id } = req.body;
+  const io = req.app.io;
   if (!car_id) {
     let data = {
       status: false,
@@ -37,6 +38,7 @@ route.post("/", (req, res) => {
                           meg: "สำเร็จ",
                           success: false
                         };
+                        io.emit("update_list_checkPoint");
                         res.json(data);
                       } else {
                         console.error(err);
@@ -53,6 +55,7 @@ route.post("/", (req, res) => {
                           meg: "สำเร็จ",
                           success: true,
                         };
+                        io.emit("update_list_checkPoint");
                         res.json(data);
                       } else {
                         console.error(err);
