@@ -19,6 +19,7 @@ const mobile_driver_login_routes = require("./mobile/driver/login");
 const mobile_driver_updateSocketId_routes = require("./mobile/driver/updateSocketId");
 const mobile_driver_updateLocation_routes = require("./mobile/driver/updateLocation");
 const mobile_driver_getDataListCheckPoint_routes = require("./mobile/driver//getDataListCheckPoint");
+const mobile_driver_carEmgcy_routes = require("./mobile/driver/carEmgcy");
 
 
 
@@ -37,4 +38,5 @@ module.exports = {
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
   mobile_driver_getDataListCheckPoint_routes,
+  mobile_driver_carEmgcy_routes,
 };

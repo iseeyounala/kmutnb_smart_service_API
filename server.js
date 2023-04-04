@@ -30,6 +30,7 @@ const {
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
   mobile_driver_getDataListCheckPoint_routes,
+  mobile_driver_carEmgcy_routes,
 } = require("./routes");
 
 const app = express();
@@ -118,6 +119,7 @@ app.use(
   // verifyJWT,
   mobile_driver_getDataListCheckPoint_routes
 );
+app.use("/mobile/driver/carEmgcy", verifyJWT, mobile_driver_carEmgcy_routes);
 
 io.listen(
   app.listen(3001, () => {

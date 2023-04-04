@@ -48,10 +48,6 @@ route.post("/", (req, res) => {
                     longitude: result_destination[0].cpd_long,
                   },
                 };
-                // io.on("addDataGetCar", () => {
-                //   io.emit("update_list_checkPoint");
-                //   console.log("addDataGetCar!!!!");
-                // });
                 io.emit("update_list_checkPoint");
                 res.json(data);
               }
