@@ -16,7 +16,7 @@ const io = socket_io();
 dotenv.config();
 
 const {
-  web_login_routes,
+  web_admin_login_routes,
   mobile_user_login_routes,
   mobile_user_getCheckPoint_routes,
   mobile_user_getCheckPointRoom_routes,
@@ -26,6 +26,24 @@ const {
   mobile_user_checkOldOrderUser_routes,
   mobile_user_updateStatusGetCar_routes,
   mobile_user_updateSocketId_routes,
+  mobile_user_searchRoom_routes,
+  mobile_user_getImgRoom_routes,
+  mobile_user_bookingRoom_routes,
+  mobile_user_dataBookingList_routes,
+  mobile_user_updateStatusBookingRoom_routes,
+  mobile_user_cencelBookingRoom_routes,
+  mobile_user_getDataEq_routes,
+  mobile_user_borrowEq_routes,
+  mobile_user_getDataActivity_routes,
+  mobile_user_joinActivity_routes,
+  mobile_user_getMyActivity_routes,
+  mobile_user_reportActivity_routes,
+  mobile_user_getHistory_routes,
+  mobile_user_getHistoryCar_routes,
+  mobile_user_getUserData_routes,
+  mobile_user_getBorrowList_routes,
+  mobile_user_updateBorrow_routes,
+  mobile_user_getNoti_routes,
   mobile_driver_login_routes,
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
@@ -35,15 +53,15 @@ const {
 
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" })); //Parse URL-encoded bodies
 // app.use(express.static("uploads"));
-// app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+// app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(express.static(__dirname));
 
 app.use(
   cors({
-    // origin: ["http://localhost:3001"],
+    // origin: "http://localhost:8888",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -57,7 +75,7 @@ app.get("/", (req, res) =>
   res.json({ message: "Powered By KMUTNB Smart Service" })
 );
 // web
-app.use("/web/login", web_login_routes);
+app.use("/web/login", web_admin_login_routes);
 
 //mobile user
 app.use("/mobile/user/login", mobile_user_login_routes);
@@ -101,6 +119,64 @@ app.use(
   verifyJWT,
   mobile_user_updateSocketId_routes
 );
+app.use("/mobile/user/searchRoom", verifyJWT, mobile_user_searchRoom_routes);
+app.use("/mobile/user/getImgRoom", verifyJWT, mobile_user_getImgRoom_routes);
+app.use("/mobile/user/bookingRoom", verifyJWT, mobile_user_bookingRoom_routes);
+app.use(
+  "/mobile/user/getDataBookingList",
+  verifyJWT,
+  mobile_user_dataBookingList_routes
+);
+app.use(
+  "/mobile/user/updateStatusBookingRoom",
+  verifyJWT,
+  mobile_user_updateStatusBookingRoom_routes
+);
+app.use(
+  "/mobile/user/cancelBookingRoom",
+  verifyJWT,
+  mobile_user_cencelBookingRoom_routes
+);
+app.use("/mobile/user/getDataEq", verifyJWT, mobile_user_getDataEq_routes);
+app.use("/mobile/user/borrowEq", verifyJWT, mobile_user_borrowEq_routes);
+app.use(
+  "/mobile/user/getDataActivity",
+  verifyJWT,
+  mobile_user_getDataActivity_routes
+);
+app.use(
+  "/mobile/user/joinActivity",
+  verifyJWT,
+  mobile_user_joinActivity_routes
+);
+app.use(
+  "/mobile/user/getMyActivity",
+  verifyJWT,
+  mobile_user_getMyActivity_routes
+);
+app.use(
+  "/mobile/user/reportActivity",
+  verifyJWT,
+  mobile_user_reportActivity_routes
+);
+app.use("/mobile/user/getHistory", verifyJWT, mobile_user_getHistory_routes);
+app.use(
+  "/mobile/user/getHsitoryCar",
+  verifyJWT,
+  mobile_user_getHistoryCar_routes
+);
+app.use("/mobile/user/getUserData", verifyJWT, mobile_user_getUserData_routes);
+app.use(
+  "/mobile/user/getBorrowList",
+  verifyJWT,
+  mobile_user_getBorrowList_routes
+);
+app.use(
+  "/mobile/user/updateBorrow",
+  verifyJWT,
+  mobile_user_updateBorrow_routes
+);
+app.use("/mobile/user/getNoti/", verifyJWT, mobile_user_getNoti_routes);
 
 // mobile Driver
 app.use("/mobile/driver/login", mobile_driver_login_routes);
@@ -120,6 +196,12 @@ app.use(
   mobile_driver_getDataListCheckPoint_routes
 );
 app.use("/mobile/driver/carEmgcy", verifyJWT, mobile_driver_carEmgcy_routes);
+
+app.use(
+  "/web/user/getLocationCar",
+  // verifyJWT,
+  mobile_user_getLocationCar_routes
+);
 
 io.listen(
   app.listen(3001, () => {

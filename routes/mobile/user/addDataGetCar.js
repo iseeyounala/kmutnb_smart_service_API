@@ -13,7 +13,7 @@ route.post("/", (req, res) => {
   const io = req.app.io;
   // console.log(req.body.dataPickUp);
   db.query(
-    `INSERT INTO tb_get_car(std_id, departure, destination, get_car_created_at) VALUES ('${std_id}', '${userOrgin.cpd_id}', '${destination.cpd_id}', '${dateNow}')`,
+    `INSERT INTO tb_get_car(std_id, departure, destination, get_car_created_at) VALUES ('${std_id}', '${userOrgin.cpd_id}', '${destination.cpd_id}', NOW())`,
     // `INSERT INTO tb_get_car(std_id, departure, destination, get_car_created_at) VALUES ('${std_id}', '${origin}', '${des}', '${dateNow}')`,
     (err, result) => {
       if (!err) {

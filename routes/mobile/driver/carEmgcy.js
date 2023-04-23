@@ -9,6 +9,7 @@ const dateNow = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
 
 route.post("/", (req, res) => {
   const { get_car_emgcy_detail } = req.body;
+  console.log(get_car_emgcy_detail)
   const io = req.app.io;
   if (get_car_emgcy_detail.length > 0) {
     db.query(
