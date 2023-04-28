@@ -11,7 +11,7 @@ route.post("/", (req, res) => {
   const { data, std_id } = req.body;
   //   console.log(data);
   db.query(
-    `INSERT INTO tb_borrow_equipment(std_id, eq_br_created_at) VALUES ('${std_id}', '${dateNow}')`,
+    `INSERT INTO tb_borrow_equipment(std_id, eq_br_created_at) VALUES ('${std_id}', NOW())`,
     (err, result) => {
       if (!err) {
         let id = result.insertId;

@@ -8,7 +8,7 @@ const io = require("../../../fun/socket");
 const dateNow = dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss");
 
 route.post("/", (req, res) => {
-  const { std_id, rtt_id, booking_date, startTime, endTime } = req.body;
+  const { std_id, rtt_id, booking_date, startTime, endTime, booking_amount } = req.body;
   // console.log(std_id, rtt_id, booking_date, startTime, endTime);
   const io = req.app.io;
   db.query(
@@ -16,13 +16,14 @@ route.post("/", (req, res) => {
                                                 rtt_id, 
                                                 booking_date, 
                                                 booking_start_time, 
-                                                booking_end_time) VALUES (${std_id}, ${rtt_id}, '${dateFormat(
+                                                booking_end_time,
+                                                booking_amount) VALUES (${std_id}, ${rtt_id}, '${dateFormat(
       booking_date,
       "yyyy-mm-dd"
     )}', '${dateFormat(startTime, "HH:MM:ss")}', '${dateFormat(
       endTime,
       "HH:MM:ss"
-    )}')`,
+    )}', '${booking_amount}')`,
     (err, result) => {
       if (!err) {
         io.emit("booking_room_new");

@@ -44,11 +44,18 @@ const {
   mobile_user_getBorrowList_routes,
   mobile_user_updateBorrow_routes,
   mobile_user_getNoti_routes,
+  mobile_user_getFaculty_routes,
+  mobile_user_getDepartment_routes,
+  mobile_user_register_routes,
+  mobile_user_editUserData_routes,
   mobile_driver_login_routes,
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
   mobile_driver_getDataListCheckPoint_routes,
   mobile_driver_carEmgcy_routes,
+  mobile_driver_getDataListUrgent_routes,
+  mobile_driver_cancelUrgent_routes,
+  mobile_driver_confirmUrgent_routes,
 } = require("./routes");
 
 const app = express();
@@ -177,6 +184,10 @@ app.use(
   mobile_user_updateBorrow_routes
 );
 app.use("/mobile/user/getNoti/", verifyJWT, mobile_user_getNoti_routes);
+app.use("/mobile/user/getFaculty", mobile_user_getFaculty_routes);
+app.use("/mobile/user/getDepartment", mobile_user_getDepartment_routes);
+app.use("/mobile/user/register", mobile_user_register_routes);
+app.use("/mobile/user/editUserdata", verifyJWT, mobile_user_editUserData_routes);
 
 // mobile Driver
 app.use("/mobile/driver/login", mobile_driver_login_routes);
@@ -196,7 +207,11 @@ app.use(
   mobile_driver_getDataListCheckPoint_routes
 );
 app.use("/mobile/driver/carEmgcy", verifyJWT, mobile_driver_carEmgcy_routes);
+app.use("/mobile/driver/getDataListUrgent", verifyJWT, mobile_driver_getDataListUrgent_routes);
+app.use("/mobile/driver/cancelUrgent", verifyJWT, mobile_driver_cancelUrgent_routes);
+app.use("/mobile/driver/confirmUrgent", verifyJWT, mobile_driver_confirmUrgent_routes);
 
+// web 
 app.use(
   "/web/user/getLocationCar",
   // verifyJWT,

@@ -18,7 +18,8 @@ route.post("/", (req, res) => {
           b.cpd_lat AS departure_lat,
           b.cpd_long AS departure_long,
           a.destination AS destination_id,
-          a.get_car_status FROM tb_get_car as a LEFT JOIN tb_checkpoint_drive as b ON a.departure = b.cpd_id WHERE a.std_id = ${std_id} AND a.get_car_status = 1 OR a.get_car_status = 2`,
+          a.get_car_status, 
+          a.get_car_urgent_status FROM tb_get_car as a LEFT JOIN tb_checkpoint_drive as b ON a.departure = b.cpd_id WHERE a.std_id = ${std_id} AND a.get_car_status = 1 OR a.get_car_status = 2`,
     (err, result_departure) => {
       if (result_departure.length > 0) {
         db.query(
@@ -29,6 +30,7 @@ route.post("/", (req, res) => {
               meg: "สำเร็จ",
               get_car_id: result_departure[0].get_car_id,
               get_car_status: result_departure[0].get_car_status,
+              get_car_urgent_status: result_departure[0].get_car_urgent_status,
               departure_id: result_departure[0].departure_id,
               departure_name: result_departure[0].departure_name,
               departure_location: {

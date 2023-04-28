@@ -30,6 +30,10 @@ const mobile_user_getUserData_routes = require("./mobile/user/getUserData");
 const mobile_user_getBorrowList_routes = require("./mobile/user/getBorrowList");
 const mobile_user_updateBorrow_routes = require("./mobile/user/updateBorrow");
 const mobile_user_getNoti_routes = require("./mobile/user/getNoti");
+const mobile_user_getFaculty_routes = require("./mobile/user/getFaculty");
+const mobile_user_getDepartment_routes = require("./mobile/user/getDepartment");
+const mobile_user_register_routes = require("./mobile/user/register");
+const mobile_user_editUserData_routes = require("./mobile/user/editUserData");
 
 //mobile Driver
 const mobile_driver_login_routes = require("./mobile/driver/login");
@@ -37,10 +41,12 @@ const mobile_driver_updateSocketId_routes = require("./mobile/driver/updateSocke
 const mobile_driver_updateLocation_routes = require("./mobile/driver/updateLocation");
 const mobile_driver_getDataListCheckPoint_routes = require("./mobile/driver//getDataListCheckPoint");
 const mobile_driver_carEmgcy_routes = require("./mobile/driver/carEmgcy");
+const mobile_driver_getDataListUrgent_routes = require("./mobile/driver/getDataListUrgent");
+const mobile_driver_cancelUrgent_routes = require("./mobile/driver/cancelUrgent");
+const mobile_driver_confirmUrgent_routes = require("./mobile/driver/confirmUrgent");
 
 // web
 const web_admin_login_routes = require("./web/login");
-const { required } = require("nodemon/lib/config");
 
 module.exports = {
   web_admin_login_routes,
@@ -71,9 +77,16 @@ module.exports = {
   mobile_user_getBorrowList_routes,
   mobile_user_updateBorrow_routes,
   mobile_user_getNoti_routes,
+  mobile_user_getFaculty_routes,
+  mobile_user_getDepartment_routes,
+  mobile_user_register_routes,
+  mobile_user_editUserData_routes,
   mobile_driver_login_routes,
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
   mobile_driver_getDataListCheckPoint_routes,
   mobile_driver_carEmgcy_routes,
+  mobile_driver_getDataListUrgent_routes,
+  mobile_driver_cancelUrgent_routes,
+  mobile_driver_confirmUrgent_routes,
 };

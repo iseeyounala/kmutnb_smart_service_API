@@ -12,7 +12,7 @@ route.post("/", (req, res) => {
   console.log(std_id);
   const result_data = [];
   db.query(
-    `SELECT * FROM tb_borrow_equipment WHERE std_id = ${std_id} AND eq_br_status = 0`,
+    `SELECT * FROM tb_borrow_equipment WHERE std_id = ${std_id} AND eq_br_status = 0 OR eq_br_status = 1`,
     (err, result) => {
       if (!err) {
         if (result.length > 0) {
@@ -24,6 +24,7 @@ route.post("/", (req, res) => {
                   let data = {
                     eq_br_id: val.eq_br_id,
                     eq_br_created_at: val.eq_br_created_at,
+                    eq_br_status: val.eq_br_status,
                     list: result_list,
                   };
                   result_data.push(data);
