@@ -48,6 +48,8 @@ const {
   mobile_user_getDepartment_routes,
   mobile_user_register_routes,
   mobile_user_editUserData_routes,
+  mobile_user_delUser_routes,
+  mobile_user_getDetailRoom_routes,
   mobile_driver_login_routes,
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
@@ -188,6 +190,9 @@ app.use("/mobile/user/getFaculty", mobile_user_getFaculty_routes);
 app.use("/mobile/user/getDepartment", mobile_user_getDepartment_routes);
 app.use("/mobile/user/register", mobile_user_register_routes);
 app.use("/mobile/user/editUserdata", verifyJWT, mobile_user_editUserData_routes);
+app.use("/mobile/user/delUser", verifyJWT, mobile_user_delUser_routes);
+app.use("/mobile/user/getDetailRoom", verifyJWT, mobile_user_getDetailRoom_routes);
+
 
 // mobile Driver
 app.use("/mobile/driver/login", mobile_driver_login_routes);

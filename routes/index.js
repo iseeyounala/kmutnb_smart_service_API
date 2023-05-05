@@ -34,6 +34,8 @@ const mobile_user_getFaculty_routes = require("./mobile/user/getFaculty");
 const mobile_user_getDepartment_routes = require("./mobile/user/getDepartment");
 const mobile_user_register_routes = require("./mobile/user/register");
 const mobile_user_editUserData_routes = require("./mobile/user/editUserData");
+const mobile_user_delUser_routes = require("./mobile/user/delUser");
+const mobile_user_getDetailRoom_routes = require("./mobile/user/getDetailRoom");
 
 //mobile Driver
 const mobile_driver_login_routes = require("./mobile/driver/login");
@@ -81,6 +83,8 @@ module.exports = {
   mobile_user_getDepartment_routes,
   mobile_user_register_routes,
   mobile_user_editUserData_routes,
+  mobile_user_delUser_routes,
+  mobile_user_getDetailRoom_routes,
   mobile_driver_login_routes,
   mobile_driver_updateSocketId_routes,
   mobile_driver_updateLocation_routes,
